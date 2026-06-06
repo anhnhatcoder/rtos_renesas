@@ -5,43 +5,7 @@ Dự án này tập trung xây dựng một hệ thống nhúng thời gian th�
 🖼️ Sơ Đồ Khối Luồng Hoạt Động (Data Flow)
 
 Hệ thống hoạt động dựa trên sự phối hợp chặt chẽ giữa hai khối xử lý phần cứng thông qua các giao thức truyền thông nhúng tiêu chuẩn (I2C, UART):
-
-       ┌────────────────────────┐
-       │     Bộ Phát ESP32      │
-       │ (Cung cấp Day-Time internet)
-       └───────────┬────────────┘
-                   │ 
-                   │ UART (Truyền Day-Time)
-                   ▼
-┌───────────────────────────────────────────────┐
-│              Renesas CK-RA6M5                 │
-│  ┌─────────────────────────────────────────┐  │
-│  │               FreeRTOS                  │  │
-│  │                                         │  │
-│  │  ┌─────────────────┐   g_sensor_mutex   │  │
-│  │  │  Sensor_Thread  ├──────────┐         │  │
-│  │  └────────┬────────┘          │         │  │
-│  │           │ I2C               ▼         │  │
-│  │           ▼             ┌───────────┐   │  │
-│  │     ┌───────────┐       │   Mutex   │   │  │
-│  │     │  Cảm biến │       └─────┬─────┘   │  │
-│  │     │  HS3001   │             │         │  │
-│  │     └───────────┘             ▼         │  │
-│  │  ┌─────────────────┐   ┌────────────┐   │  │
-│  │  │   Uart_Thread   ├──>│ Shared Var │   │  │
-│  │  └────────┬────────┘   └────────────┘   │  │
-│  │           │                             │  │
-│  │           ▼                             │  │
-│  │    ┌──────────────┐                     │  │
-│  │    │  Ngoại vi    │                     │  │
-│  │    │  Đồng bộ RTC │                     │  │
-│  │    └──────────────┘                     │  │
-│  └─────────────────────────────────────────┘  │
-└──────────────────────┬────────────────────────┘
-                       │ UART (Gửi JSON: Time + Temp + Hum)
-                       ▼
-         [Trạm Giám Sát / Gateway thu nhận]
-
+<img width="697" height="567" alt="image" src="https://github.com/user-attachments/assets/88a546bd-165e-498c-9300-b08818630925" />
 
 🔌 Kiến Trúc Thiết Bị Phần Cứng
 
