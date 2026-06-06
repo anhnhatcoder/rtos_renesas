@@ -104,13 +104,8 @@ Thực thi vTaskDelay(1000) để lặp lại chu kỳ tiếp theo.
 
 Dưới đây là tiến trình chuyển đổi ngữ cảnh thực tế của hệ thống được quản lý bởi FreeRTOS Scheduler:
 
-Thời gian ──►
-[Sensor_Thread] ──Đánh thức──► [Khóa Mutex] ──Đọc HS3001──► [Nhả Mutex] ──vTaskDelay(1000)──┐ (Blocked)
-                                                                                          │
-                                   [Context Switch điều phối bởi Scheduler] ◄──────────────┘
-                                                                                          │
-[Uart_Thread]   ◄─────────────────────────────────────────────────────────────────────────┘
-                └──► [Khóa Mutex] ──Đọc Var Shared──► [Nhả Mutex] ──Gửi UART JSON──► vTaskDelay(1000)
+<img width="966" height="433" alt="image" src="https://github.com/user-attachments/assets/13519311-79f4-4937-bc72-40252e822a75" />
+
 
 
 📨 Định Dạng Gói Tin Đầu Raw (UART JSON Frame)
